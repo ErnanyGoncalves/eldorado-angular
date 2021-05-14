@@ -11,22 +11,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th class="align-middle" scope="row">1</th>
-                        
-                <td class="align-middle text-nowrap">Category 1Category 1Category 1Category 1Category 1</td>
+            <tr *ngFor="let category of categories">
+                <th class="align-middle" scope="row">{{category.id}}</th>
+                <td class="align-middle text-nowrap">{{category.name}}</td>
                 <td class="align-middle">
                     <ul class="p-2">
                         <li class="text-nowrap">Device 1</li>
                         <li>Device 1</li>
                         <li>Device 1</li>
-                        <li>Device 1</li>
-                        <li>Device 1</li>
-                        <li>Device 1</li>
                     </ul>
                 </td>
                 <td class="align-middle">
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" (click)="deleteCategory(category.id)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             class="bi bi-trash" viewBox="0 0 16 16">
                             <path

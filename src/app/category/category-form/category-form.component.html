@@ -4,10 +4,10 @@
             <label for="inputName" class="col-form-label">Name</label>
         </div>
         <div class="col-lg-auto col-sm-10">
-            <input ngModel name="name" type="text" id="inputName" class="form-control" required>
+            <input ngModel name="name" type="text" id="inputName" maxlength="128" class="form-control" required>
         </div>
         <div class="col-lg-auto col-sm-12 mt-lg-0 mt-sm-3">
-            <button class="btn btn-success form-control" type="submit" [disabled]="!f.valid">New category</button>
+            <button class="btn btn-success" type="submit" [disabled]="!f.valid">New category</button>
         </div>
     </div>
 </form>

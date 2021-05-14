@@ -4,13 +4,13 @@
             <label for="inputparNumber" class="col-form-label">Part number</label>
         </div>
         <div class="col-lg-auto col-sm-9 mt-lg-0 mt-sm-3">
-            <input ngModel name="partNumber" type="number" id="inputparNumber" class="form-control" required>
+            <input ngModel name="partNumber" min="0" type="number" id="inputparNumber" class="form-control" required>
         </div>
         <div class="col-lg-auto col-sm-3 mt-lg-0 mt-sm-3">
             <label for="inputColor" class="col-form-label">Color</label>
         </div>
         <div class="col-lg-auto col-sm-9 mt-lg-0 mt-sm-3">
-            <input ngModel name="color" type="text" id="inputColor" class="form-control" required>
+            <input ngModel name="color" maxlength="16" type="text" id="inputColor" class="form-control" required>
         </div>
         <div class="col-lg-auto col-sm-3 mt-lg-0 mt-sm-3">
             <label for="category" class="col-form-label">Categories</label>
@@ -23,7 +23,7 @@
             </select>
         </div>
         <div class="col-lg-auto col-sm-12 mt-lg-0 mt-sm-3">
-            <button class="btn btn-success form-control" type="submit" [disabled]="!f.valid">New device</button>
+            <button class="btn btn-success" type="submit" [disabled]="!f.valid">New device</button>
         </div>
     </div>
 </form>

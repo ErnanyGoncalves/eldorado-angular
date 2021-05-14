@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { EldoradoService } from 'src/app/eldorado.service';
 
 @Component({
   selector: 'app-device-form',
@@ -8,13 +9,15 @@ import { NgForm } from '@angular/forms';
 })
 export class DeviceFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eldoradoService: EldoradoService) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form: NgForm) {
-    console.log(form);
+  onSubmit(form: NgForm){
+    console.log(form.value);  
+    this.eldoradoService.newDevice(form.value).subscribe(res=>{
+      console.log(res);
+    });
   }
-
 }

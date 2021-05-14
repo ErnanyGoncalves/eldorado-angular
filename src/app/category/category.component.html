@@ -1,3 +1,6 @@
+<div *ngIf="categories.length == 0" [categories]="categories">
+    <h3>You have no category created. Create the first one!</h3>
+</div>
 <app-category-form></app-category-form>
 <hr>
-<app-category-list></app-category-list>
+<app-category-list *ngIf="categories.length > 0" [categories]="categories"></app-category-list>

@@ -1,9 +1,9 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" [routerLink]="['/category']">Category</a>
+      <button class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/category']">Category</button>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" routerLinkActive="active" [routerLink]="['/device']">Device</a>
+      <button class="nav-link" [ngClass]="{'disabled': categories.length==0}" routerLinkActive="active" [routerLink]="['/device']" [disabled]="categories.length==0">Device</button>
     </li>
   </ul>

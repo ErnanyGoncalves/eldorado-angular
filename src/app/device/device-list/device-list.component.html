@@ -12,13 +12,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th class="align-middle" scope="row">1</th>
-                <td class="align-middle text-nowrap">123456</td>
-                <td class="align-middle text-nowrap">Black</td>
-                <td class="align-middle">1</td>
+            <tr *ngFor="let device of devices">
+                <th class="align-middle" scope="row">{{device.id}}</th>
+                <td class="align-middle text-nowrap">{{device.partNumber}}</td>
+                <td class="align-middle text-nowrap">{{device.color}}</td>
+                <td class="align-middle">device.categoryName</td>
                 <td class="align-middle">
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" (click)="deleteDevice(device.id)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                             class="bi bi-trash" viewBox="0 0 16 16">
                             <path

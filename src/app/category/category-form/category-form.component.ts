@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { EldoradoService } from 'src/app/eldorado.service';
 
 @Component({
   selector: 'app-category-form',
@@ -8,13 +9,16 @@ import { NgForm } from '@angular/forms';
 })
 export class CategoryFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eldoradoService: EldoradoService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(form: NgForm){
-    console.log(form);  
+    console.log(form.value);  
+    this.eldoradoService.newCategory(form.value).subscribe(res=>{
+      console.log(res);
+    });
 }
 
 }
