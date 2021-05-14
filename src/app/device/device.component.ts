@@ -13,9 +13,14 @@ export class DeviceComponent implements OnInit {
 
   devices;
 
+  categories;
+
   ngOnInit(): void {
     this.eldoradoService.getDevices().subscribe(res=>{
       this.devices = res;  
+    })
+    this.eldoradoService.getCategories().subscribe(res=>{
+      this.categories = res;  
     })
   }
 

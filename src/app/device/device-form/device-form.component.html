@@ -16,10 +16,9 @@
             <label for="category" class="col-form-label">Categories</label>
         </div>
         <div class="col-lg-auto col-sm-9 mt-lg-0 mt-sm-3">
-            <select ngModel name="category" class="form-select" required>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select ngModel name="categoryId" class="form-select" required>
+                <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+                
             </select>
         </div>
         <div class="col-lg-auto col-sm-12 mt-lg-0 mt-sm-3">

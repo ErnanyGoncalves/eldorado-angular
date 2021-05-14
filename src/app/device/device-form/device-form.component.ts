@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EldoradoService } from 'src/app/eldorado.service';
 
@@ -10,12 +10,12 @@ import { EldoradoService } from 'src/app/eldorado.service';
 export class DeviceFormComponent implements OnInit {
 
   constructor(private eldoradoService: EldoradoService) { }
+  @Input() categories;
 
   ngOnInit(): void {
   }
 
   onSubmit(form: NgForm){
-    console.log(form.value);  
     this.eldoradoService.newDevice(form.value).subscribe(res=>{
       console.log(res);
     });
