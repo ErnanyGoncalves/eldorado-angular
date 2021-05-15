@@ -1,6 +1,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { EldoradoService } from 'src/app/eldorado.service';
+import { Device } from 'src/app/models/device.model';
+import { DeviceService } from 'src/app/services/device.service';
 
 @Component({
   selector: 'app-device-list',
@@ -9,19 +10,20 @@ import { EldoradoService } from 'src/app/eldorado.service';
 })
 export class DeviceListComponent implements OnInit {
 
-  constructor(private eldoradoService: EldoradoService) { }
+  constructor(private deviceService: DeviceService) { }
 
-  @Input() devices;
+  @Input() devices: Device[];
 
   ngOnInit(): void {
   }
 
+
   deleteDevice(id){
-    console.log(id);
-    
-    this.eldoradoService.delDevice(id).subscribe(()=>{
-      console.log("Device",id,"deleted!");
-    })
+   
+    this.deviceService.delDevice(id).subscribe(()=>{
+      this.devices = this.devices.filter((device)=>device.id!=id);
+      this.deviceService.emitDevicesChangeEvent(this.devices);
+    });
   }
 
 }

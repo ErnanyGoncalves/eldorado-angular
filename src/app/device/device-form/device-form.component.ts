@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { EldoradoService } from 'src/app/eldorado.service';
+import { Category } from 'src/app/models/category.model';
+import { DeviceService } from 'src/app/services/device.service';
 
 @Component({
   selector: 'app-device-form',
@@ -9,15 +10,20 @@ import { EldoradoService } from 'src/app/eldorado.service';
 })
 export class DeviceFormComponent implements OnInit {
 
-  constructor(private eldoradoService: EldoradoService) { }
-  @Input() categories;
+  constructor(private deviceService: DeviceService) { }
+
+  @Input() devices : Object[];
+  @Input() categories : Category[];
 
   ngOnInit(): void {
   }
 
-  onSubmit(form: NgForm){
-    this.eldoradoService.newDevice(form.value).subscribe(res=>{
-      console.log(res);
+  onSubmit(form: NgForm){   
+    console.log(form.value);
+    this.deviceService.newDevice(form.value).subscribe(res=>{
+      this.devices.push(res);
+      this.deviceService.emitDevicesChangeEvent(this.devices);
+      form.reset();
     });
   }
 }

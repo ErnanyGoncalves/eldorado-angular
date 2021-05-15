@@ -4,7 +4,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Devices</th>
                 <th scope="col"></th>
@@ -16,9 +16,7 @@
                 <td class="align-middle text-nowrap">{{category.name}}</td>
                 <td class="align-middle">
                     <ul class="p-2">
-                        <li class="text-nowrap">Device 1</li>
-                        <li>Device 1</li>
-                        <li>Device 1</li>
+                        <li class="text-nowrap" *ngFor="let device of category.listOfDevices">{{device}}</li>
                     </ul>
                 </td>
                 <td class="align-middle">

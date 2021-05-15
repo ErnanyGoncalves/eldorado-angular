@@ -1,8 +1,8 @@
-<div>
+<app-device-form [devices]="devices" [categories]="categories"></app-device-form>
+<hr>
+
+<div *ngIf="devices.length == 0">
     <h3>You have no device created. Create the first one!</h3>
 </div>
 
-<app-device-form [categories]="categories"></app-device-form>
-<hr>
-
-<app-device-list [devices]="devices"></app-device-list>
+<app-device-list *ngIf="devices.length > 0" [devices]="devices"></app-device-list>

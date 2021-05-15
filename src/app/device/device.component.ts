@@ -1,27 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { EldoradoService } from '../eldorado.service';
+import { Category } from '../models/category.model';
+import { Device } from '../models/device.model';
+import { CategoryService } from '../services/category.service';
+import { DeviceService } from '../services/device.service';
 
 @Component({
   selector: 'app-device',
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.css'],
-  providers:[EldoradoService]
 })
 export class DeviceComponent implements OnInit {
 
-  constructor(private eldoradoService: EldoradoService) { }
+  constructor(private categoryService: CategoryService, private deviceService: DeviceService) { }
 
-  devices;
-
-  categories;
+  categories: Category[] = [];
+  devices: Device[] = [];
 
   ngOnInit(): void {
-    this.eldoradoService.getDevices().subscribe(res=>{
-      this.devices = res;  
-    })
-    this.eldoradoService.getCategories().subscribe(res=>{
-      this.categories = res;  
-    })
-  }
 
+    this.deviceService.devicesChange.subscribe((res)=>{      
+      this.devices = res;
+    });
+
+    this.deviceService.getDevices().subscribe((res)=>{
+      this.devices = res;
+    });
+     
+    this.categoryService.categoriesChange.subscribe((res)=>{      
+      this.categories = res;
+    });
+
+    this.categoryService.getCategories().subscribe((res) => {
+      this.categories = res;
+    });   
+    
+  }
 }

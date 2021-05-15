@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { EldoradoService } from 'src/app/eldorado.service';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-category-form',
@@ -9,16 +9,19 @@ import { EldoradoService } from 'src/app/eldorado.service';
 })
 export class CategoryFormComponent implements OnInit {
 
-  constructor(private eldoradoService: EldoradoService) { }
+  constructor(private categoryService: CategoryService) { }
+
+  @Input() categories: Object[];
 
   ngOnInit(): void {
   }
-
-  onSubmit(form: NgForm){
-    console.log(form.value);  
-    this.eldoradoService.newCategory(form.value).subscribe(res=>{
-      console.log(res);
+  
+  onSubmit(form: NgForm) {
+    this.categoryService.newCategory(form.value).subscribe(res=>{     
+      this.categories.push(res);
+      this.categoryService.emitCategoriesChangeEvent(this.categories);
+      form.reset();
     });
-}
+  }
 
 }

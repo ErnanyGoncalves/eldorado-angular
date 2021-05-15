@@ -1,20 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { EldoradoService } from '../eldorado.service';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
-  providers:[EldoradoService]
 })
 export class NavComponent implements OnInit {
 
-  constructor(private eldoradoService: EldoradoService) { }
+  constructor(private categoryService: CategoryService) { }
 
-  categories = [];
+  hasCategories: Boolean = false;
 
   ngOnInit(): void {
-    this.categories = this.eldoradoService.categories;
+    this.categoryService.getCategories().subscribe((res) => {
+      this.hasCategories = res.length > 0;
+    });
+
+    this.categoryService.categoriesChange.subscribe((res) => {
+      this.hasCategories = res.length > 0;     
+    });
+
   }
 
 }

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { EldoradoService } from 'src/app/eldorado.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Category } from 'src/app/models/category.model';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-category-list',
@@ -8,20 +9,19 @@ import { EldoradoService } from 'src/app/eldorado.service';
 })
 export class CategoryListComponent implements OnInit {
 
-  constructor(private eldoradoService: EldoradoService) { }
+  constructor(private categoryService: CategoryService) { }
 
-  @Input() categories;
+  @Input() categories: Category[];
 
-  ngOnInit(): void {
-    
-  }
 
+  ngOnInit(): void {}
+  
   deleteCategory(id){
-    console.log(id);
-    
-    this.eldoradoService.delCategory(id).subscribe(()=>{
-      console.log("Category",id,"deleted!");
-    })
+   
+    this.categoryService.delCategory(id).subscribe(()=>{
+      this.categories = this.categories.filter((category)=>category.id!=id);
+      this.categoryService.emitCategoriesChangeEvent(this.categories);
+    });
   }
 
 }

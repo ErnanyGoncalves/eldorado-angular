@@ -1,32 +1,28 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { EldoradoService } from '../eldorado.service';
+import { Component, OnInit } from '@angular/core';
+import { Category } from '../models/category.model';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
-  providers:[EldoradoService]
 })
 export class CategoryComponent implements OnInit {
 
-  constructor(private eldoradoService: EldoradoService) { }
+  constructor(private categoryService: CategoryService) { }
 
-  categories;
+  categories : Category[] = [];
 
   ngOnInit(): void {
-    this.eldoradoService.getCategories().subscribe(res=>{
-      this.categories = res;  
-    })
-  }
-
-  deleteCategory(id){
-    console.log(id);
+   this.categoryService.categoriesChange.subscribe((res)=>{      
+      this.categories = res;
+    });
     
-    this.eldoradoService.delCategory(id).subscribe(()=>{
-      console.log("Category",id,"deleted!");
-    })
+    this.categoryService.getCategories().subscribe((res) => {
+      this.categories = res;
+    });
   }
 
-
+  
 
 }

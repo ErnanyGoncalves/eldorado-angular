@@ -1,9 +1,11 @@
 <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <button class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" [routerLink]="['/category']">Category</button>
-    </li>
+  <li class="nav-item">
+    <button class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+      [routerLink]="['/category']">Category</button>
+  </li>
 
-    <li class="nav-item">
-      <button class="nav-link" [ngClass]="{'disabled': categories.length==0}" routerLinkActive="active" [routerLink]="['/device']" [disabled]="categories.length==0">Device</button>
-    </li>
-  </ul>
+  <li class="nav-item">
+    <button class="nav-link" [ngClass]="{'disabled': !hasCategories}" routerLinkActive="active"
+      [routerLink]="['/device']" [disabled]="!hasCategories">Device</button>
+  </li>
+</ul>
