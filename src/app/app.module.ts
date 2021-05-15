@@ -12,12 +12,13 @@ import { CategoryFormComponent } from './category/category-form/category-form.co
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { DeviceListComponent } from './device/device-list/device-list.component';
 import { DeviceFormComponent } from './device/device-form/device-form.component';
+import { AuthGuard } from './services/auth-guard.service';
 
-const eldoradoRoutes:Routes = [
-  {path:'',component:CategoryComponent},
-  {path:'category',component:CategoryComponent},
-  {path:'device',component:DeviceComponent},
-  {path:':anythingelse',redirectTo:''}
+const eldoradoRoutes: Routes = [
+  { path: '', component: CategoryComponent },
+  { path: 'category', component: CategoryComponent },
+  { path: 'device', canActivate: [AuthGuard], component: DeviceComponent },
+  { path: ':anythingelse', redirectTo: '' }
 ];
 
 @NgModule({
@@ -37,7 +38,7 @@ const eldoradoRoutes:Routes = [
     RouterModule.forRoot(eldoradoRoutes),
     FormsModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
