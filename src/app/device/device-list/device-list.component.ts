@@ -17,13 +17,12 @@ export class DeviceListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-  deleteDevice(id){
-   
-    this.deviceService.delDevice(id).subscribe(()=>{
-      this.devices = this.devices.filter((device)=>device.id!=id);
-      this.deviceService.emitDevicesChangeEvent(this.devices);
-    });
+  deleteDevice({id,partNumber}){
+    if (confirm(`Are you sure you want to delete the device ${partNumber}?`))
+      this.deviceService.delDevice(id).subscribe(()=>{
+        this.devices = this.devices.filter((device)=>device.id!=id);
+        this.deviceService.emitDevicesChangeEvent(this.devices);
+      });
   }
 
 }

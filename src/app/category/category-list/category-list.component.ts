@@ -14,14 +14,20 @@ export class CategoryListComponent implements OnInit {
   @Input() categories: Category[];
 
 
-  ngOnInit(): void {}
-  
-  deleteCategory(id){
-   
-    this.categoryService.delCategory(id).subscribe(()=>{
-      this.categories = this.categories.filter((category)=>category.id!=id);
-      this.categoryService.emitCategoriesChangeEvent(this.categories);
-    });
+  ngOnInit(): void { }
+
+  deleteCategory({ id, name, listOfDevices }) {
+
+
+    if (confirm(listOfDevices && listOfDevices.length > 0 ? `Are you sure you want to delete the ${name} category and its ${listOfDevices.length} device(s)?` : `Are you sure you want to delete the ${name} category?`)) {
+      this.categoryService.delCategory(id).subscribe(() => {
+        this.categories = this.categories.filter((category) => category.id != id);
+        this.categoryService.emitCategoriesChangeEvent(this.categories);
+      });
+    }
+
   }
 
+
 }
+
